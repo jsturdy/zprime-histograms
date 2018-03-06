@@ -629,8 +629,10 @@ void ZprimeMuMuPatMiniAodNewMC::Loop(bool debug)
 
     m_genMass = GenMass(m_genET1, m_genPhi1, m_genEta1, m_genEn1,
 			m_genET2, m_genPhi2, m_genEta2, m_genEn2);
-    m_vtxMassSmearedMu = smearedMass(EtaRecMu1, PhiRecMu1, PtRecTunePMuBestTrack1, EtaRecMu2, PhiRecMu2, PtRecTunePMuBestTrack2, m_vtxMassMu);
-    m_vtxMassScaledMu  = scaledMass(EtaRecMu1, PhiRecMu1, PtRecTunePMuBestTrack1, ChargeRecMu1,  EtaRecMu2, PhiRecMu2, PtRecTunePMuBestTrack2, ChargeRecMu2, m_vtxMassMu);
+    m_vtxMassSmearedMu = smearedMass(EtaRecMu1, PhiRecMu1, PtRecTunePMuBestTrack1,
+				     EtaRecMu2, PhiRecMu2, PtRecTunePMuBestTrack2, m_vtxMassMu);
+    m_vtxMassScaledMu  = scaledMass(EtaRecMu1, PhiRecMu1, PtRecTunePMuBestTrack1, ChargeRecMu1,
+				    EtaRecMu2, PhiRecMu2, PtRecTunePMuBestTrack2, ChargeRecMu2, m_vtxMassMu);
 
     double CosmicRejec = ThreeDangle(pxRecMu1,pyRecMu1,pzRecMu1,pRecMu1,
 				     pxRecMu2,pyRecMu2,pzRecMu2,pRecMu2);
@@ -1092,13 +1094,14 @@ void ZprimeMuMuPatMiniAodNewMC::PlotRecoInfo(float CosmicMuonRejec, float vertex
   float SF1 = 1.;
   float SF2 = 1.;
 
-  if (fabs(etaMu1) <= 1.6 && pMu1 > 100) SF1 = (0.994 - 4.08e-6 * pMu1)/(0.994 - 4.08e-6 * 100);
-  else if (fabs(etaMu1) > 1.6 && pMu1 > 200)  SF1 = ((0.9784 - 4.73e-5 * pMu1)/(0.9908 - 1.26e-5 * pMu1)) / ((0.9784 - 4.73e-5 * 200)/(0.9908 - 1.26e-5 * 200)) ;
-  if (fabs(etaMu2) <= 1.6 && pMu2 > 100) SF2 = (0.994 - 4.08e-6 * pMu2)/(0.994 - 4.08e-6 * 100);
-  else if (fabs(etaMu2) > 1.6 && pMu2 > 200)  SF2 = ((0.9784 - 4.73e-5 * pMu2)/(0.9908 - 1.26e-5 * pMu2)) / ((0.9784 - 4.73e-5 * 200)/(0.9908 - 1.26e-5 * 200) ) ;
-
-
-
+  if (fabs(etaMu1) <= 1.6 && pMu1 > 100)
+    SF1 = (0.994 - 4.08e-6 * pMu1)/(0.994 - 4.08e-6 * 100);
+  else if (fabs(etaMu1) > 1.6 && pMu1 > 200)
+    SF1 = ((0.9784 - 4.73e-5 * pMu1)/(0.9908 - 1.26e-5 * pMu1)) / ((0.9784 - 4.73e-5 * 200)/(0.9908 - 1.26e-5 * 200));
+  if (fabs(etaMu2) <= 1.6 && pMu2 > 100)
+    SF2 = (0.994 - 4.08e-6 * pMu2)/(0.994 - 4.08e-6 * 100);
+  else if (fabs(etaMu2) > 1.6 && pMu2 > 200)
+    SF2 = ((0.9784 - 4.73e-5 * pMu2)/(0.9908 - 1.26e-5 * pMu2)) / ((0.9784 - 4.73e-5 * 200)/(0.9908 - 1.26e-5 * 200) );
 
   h2_CSSmearedMassBinned_->Fill(m_vtxMassSmearedMu,        0.,newweight);
   h2_CSMassBinned_       ->Fill(m_vtxMassMu,               0.,newweight);
